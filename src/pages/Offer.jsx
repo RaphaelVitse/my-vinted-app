@@ -4,7 +4,7 @@ const Offer = () => {
   return (
     <div>
       <h1>je suis dans Offer</h1>
-      <Link to="/Home">Aller vers Home</Link>
+      <Link to="/">Aller vers Home</Link>
     </div>
   );
 };

@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+}
+/* PARTIE HEADER */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  background: lightpink;
+}
+
+header {
+  border-bottom: 1px solid lightgrey;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .btn {
+  display: flex;
+  gap: 15px;
+}
+
+/* PARTIE BANNIERE */
+
+.banniere {
+  position: relative;
+}
+
+.banniere img {
+  width: 100%;
+  height: 455px;
+  object-fit: cover;
+}
+.question {
+  width: 410px;
+  height: 210px;
+  background: white;
+  position: absolute;
+  top: 20%;
+  left: 123px;
+}
+
+/* PARTIE OFFRE*/
+.avatar {
+  width: 15px;
+}
+
+.offer-container {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+.offer-card {
+  background: cornflowerblue;
+  width: 230px;
+  height: 460px;
+}
+.product-img {
+  width: 230px;
+  height: 360px;
+  object-fit: cover;
+}
