@@ -57,8 +57,8 @@ const Home = () => {
                 <p className="username"> {offer.owner.account.username}</p>
                 <Link
                   style={{ textDecoration: "none" }}
-                  target="_blank"
-                  to={`/${offer._id}`}
+                  //   target="_blank"
+                  to={`/offers/${offer._id}`}
                 >
                   <div>
                     <img

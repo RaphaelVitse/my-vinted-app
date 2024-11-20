@@ -150,8 +150,30 @@ form input {
 }
 /* PARTIE OFFER */
 
-.main-right {
-  width: 500px;
-  height: 500px;
+.details-container {
+  display: flex;
+  justify-content: space-between;
+}
+.main-left {
+  width: 450px;
+  height: 600px;
   background: blue;
+}
+.main-right {
+  width: 400px;
+  height: 600px;
+  background: red;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.btn-buy {
+  width: 320px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: white;
+  background: #007783;
+  margin-bottom: 30px;
 }
