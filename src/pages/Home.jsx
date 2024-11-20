@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 import banner from "../assets/banner.jpg";
+import tear from "../assets/tear-white.svg";
 
 const Home = () => {
   const [data, setData] = useState({});
@@ -30,43 +31,60 @@ const Home = () => {
     <>
       <div className="banniere">
         <div className="question">
-          <h1>Prets a faire du tri dans vosplacards ?</h1>
+          <h1>Prets a faire du tri dans vos placards ?</h1>
           <button>Commencer à vendre</button>
         </div>
-        <img src={banner} alt="banniere" />
+        <img className="ban" src={banner} alt="banniere" />
+        {/* <img className="tear" src={tear} alt="banniere" /> */}
       </div>
       <main className="container offer-container">
         {data.offers.map((offer) => {
+          //   console.log(
+          //     `owner = + ${offer.owner.account.username} et avatar est ${offer.owner.account.avatar.url} `
+          //   );
+
           return (
             <section key={offer._id}>
               <div className="offer-card">
-                <img
-                  className="avatar"
-                  src={offer.owner.account.avatar.secure_url}
-                  alt="avatar"
-                />
-                <p> {offer.owner.account.username}</p>
-
-                <div
-                  onClick={() => {
-                    <Link to="/offer/:{offer._id}"> </Link>;
-                  }}
-                >
+                {/* {offer.owner.account.avatar.url_secure && (
                   <img
-                    className="product-img"
-                    src={offer.product_image.secure_url}
-                    alt=""
+                    className="avatar"
+                    src={offer.owner.account.avatar.url}
+                    alt="avatar"
                   />
-                  <p> {offer.product_price} €</p>
-                  {offer.product_details.map((details, index) => {
-                    return (
-                      <div key={index}>
-                        <p>{details.TAILLE}</p>
-                        <p>{details.MARQUE}</p>
-                      </div>
-                    );
-                  })}
-                </div>
+                )} */}
+
+                <p className="username"> {offer.owner.account.username}</p>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  target="_blank"
+                  to={`/${offer._id}`}
+                >
+                  <div>
+                    <img
+                      className="product-img"
+                      src={offer.product_image.secure_url}
+                      alt="photos"
+                    />
+                    <div className="description-offer">
+                      <p className="price"> {offer.product_price} €</p>
+                      {offer.product_details.map((details, index) => {
+                        return (
+                          <div key={index}>
+                            <p className="offer-size-brand">{details.TAILLE}</p>
+                          </div>
+                        );
+                      })}
+                      {offer.product_details.map((details, index) => {
+                        return (
+                          <div key={index}>
+                            <p className="offer-size-brand">{details.MARQUE}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </Link>
               </div>
             </section>
           );

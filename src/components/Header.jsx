@@ -1,4 +1,5 @@
 import logo from "../assets/logo.svg";
+import { FiSearch } from "react-icons/fi";
 
 const Header = () => {
   return (
@@ -8,10 +9,16 @@ const Header = () => {
           <div className="logo">
             <img src={logo} alt="logo vinted" />
           </div>
+          <form>
+            <div className="search-bar">
+              <FiSearch className="icon-search" />
+              <input type="text" placeholder="Recherche des articles" />
+            </div>
+          </form>
           <div className="btn">
-            <button>S'inscrire</button>
-            <button>Se connecter</button>
-            <button>Vends tes articles</button>
+            <button className="btn-subs-login">S'inscrire</button>
+            <button className="btn-subs-login">Se connecter</button>
+            <button className="btn-sell">Vends tes articles</button>
           </div>
         </nav>
       </header>
