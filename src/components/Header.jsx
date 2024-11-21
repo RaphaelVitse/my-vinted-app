@@ -1,12 +1,19 @@
 import logo from "../assets/logo.svg";
 import { FiSearch } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <>
       <header>
         <nav className="container">
-          <div className="logo">
+          <div
+            className="logo"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             <img src={logo} alt="logo vinted" />
           </div>
           <form>
