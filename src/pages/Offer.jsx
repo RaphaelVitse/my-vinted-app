@@ -1,17 +1,22 @@
-import { Link, useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Offer = () => {
+  const { id } = useParams();
+  // console.log(params);
+
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
-  const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5173/offers/${id}`);
+        const response = await axios.get(
+          `https://lereacteur-vinted-api.herokuapp.com/v2/offers/${id}`
+        );
+        console.log(response);
+
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -20,24 +25,32 @@ const Offer = () => {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return isLoading ? (
     <p>Loading...</p>
   ) : (
     <>
       <section className="container">
-        {data.offers && data.offers.length > 0 ? (
-          console.log(data.offers)
-        ) : (
+        {!data ? (
           <p>Aucune offre trouvée.</p>
-        )}
-        <div className="details-container">
-          <div className="main-left"></div>
-          <div className="main-right">
-            <button className="btn-buy"> Acheter</button>
+        ) : (
+          <div className="details-container">
+            <div className="main-left">
+              <img src={data.product_image.secure_url} alt="" />
+            </div>
+
+            <div className="main-right">
+              <p>{data.product_price} </p>
+              <p>{data.product_details[0].MARQUE} </p>
+              <p>{data.product_price} </p>
+              <p>{data.product_price} </p>
+              <p>{data.product_price} </p>
+
+              <button className="btn-buy"> Acheter</button>
+            </div>
           </div>
-        </div>
+        )}
       </section>
     </>
   );

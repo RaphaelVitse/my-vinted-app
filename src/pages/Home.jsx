@@ -6,6 +6,9 @@ import banner from "../assets/banner.jpg";
 import tear from "../assets/tear-white.svg";
 
 const Home = () => {
+  const params = useParams();
+  console.log(params);
+
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -39,22 +42,24 @@ const Home = () => {
       </div>
       <main className="container offer-container">
         {data.offers.map((offer) => {
-          //   console.log(
-          //     `owner = + ${offer.owner.account.username} et avatar est ${offer.owner.account.avatar.url} `
-          //   );
+          // console.log(
+          //   `owner = + ${offer.owner.account.username} et avatar est ${offer.owner.account.avatar.url} `
+          // );
 
           return (
             <section key={offer._id}>
               <div className="offer-card">
-                {/* {offer.owner.account.avatar.url_secure && (
-                  <img
-                    className="avatar"
-                    src={offer.owner.account.avatar.url}
-                    alt="avatar"
-                  />
-                )} */}
+                <div className="user-card">
+                  {offer.owner.account.avatar && (
+                    <img
+                      className="avatar"
+                      src={offer.owner.account.avatar.url}
+                      alt="avatar"
+                    />
+                  )}
 
-                <p className="username"> {offer.owner.account.username}</p>
+                  <p className="username"> {offer.owner.account.username}</p>
+                </div>
                 <Link
                   style={{ textDecoration: "none" }}
                   //   target="_blank"

@@ -126,8 +126,15 @@ form input {
 }
 .username {
   color: #c3c3c3;
-  margin-bottom: 10px;
 }
+.user-card {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
+  height: 40px;
+}
+
 .product-img {
   width: 230px;
   height: 360px;
@@ -154,18 +161,22 @@ form input {
   display: flex;
   justify-content: space-between;
 }
-.main-left {
+.main-left img {
   width: 450px;
   height: 600px;
-  background: blue;
+  margin-top: 50px;
+  object-fit: cover;
+  /* background: blue; */
 }
 .main-right {
   width: 400px;
   height: 600px;
-  background: red;
+  background: lightskyblue;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  margin-top: 50px;
 }
 .btn-buy {
   width: 320px;
@@ -176,4 +187,29 @@ form input {
   color: white;
   background: #007783;
   margin-bottom: 30px;
+}
+
+/* PAGE SIGNUP*/
+form {
+  background: lightseagreen;
+  margin: 0 auto;
+}
+
+.title-form {
+}
+
+form,
+form input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  width: 420px;
+}
+
+.newsletter {
+  display: flex;
+  justify-content: center;
 }
