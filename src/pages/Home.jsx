@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import banner from "../assets/banner.jpg";
-import tear from "../assets/tear-white.svg";
+// import tear from "../assets/tear-white.svg";
 
 const Home = () => {
   const params = useParams();
