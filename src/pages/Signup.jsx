@@ -10,46 +10,87 @@ const Signup = () => {
     newsletter: false,
   });
 
-  const handleChange = (event) => {
+  const handleChangeUsername = (event) => {
     const value = event.target.value;
-    const newFormData = [...formData];
-    newFormData.push({
-      username: value.username,
-      email: value.email,
-      password: value.password,
-    });
+    const newFormData = {
+      ...formData,
+      username: value,
+    };
+
     setFormData(newFormData);
+  };
+  const handleChangeEmail = (event) => {
+    const value = event.target.value;
+    const newFormData = {
+      ...formData,
+      email: value,
+    };
+
+    setFormData(newFormData);
+  };
+  const handleChangePassword = (event) => {
+    const value = event.target.value;
+    const newFormData = {
+      ...formData,
+      password: value,
+    };
+
+    setFormData(newFormData);
+  };
+  //   const handleChangeNewsletter = (event) => {
+  //     const value = event.target.value;
+  //     const newFormData = {
+  //       ...formData,
+  //       password: value,
+  //     };
+
+  //     setFormData(newFormData);
+  //   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post(
+        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+        formData
+      );
+      console.log(response.data.token);
+      const token = response.data.token;
+      Cookies.set("token", token, { expires: 7 });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-      <form onSubmit="">
+      <form onSubmit={handleSubmit}>
         <h1 className="title-form">S'inscrire</h1>
         <input
           type="text"
           placeholder="Nom d'utilisateur"
           value={formData.username}
-          onChange={handleChange}
+          onChange={handleChangeUsername}
         />
         <input
           type="mail"
           placeholder="Email"
           name="email"
           value={formData.email}
-          onChange={handleChange}
+          onChange={handleChangeEmail}
         />
         <input
           type="password"
           placeholder="Mot de passe"
           name="password"
           value={formData.password}
-          onChange={handleChange}
+          onChange={handleChangePassword}
         />
         <div className="newsletter">
           <input
             type="checkbox"
             name="newsletter"
-            // checked={formData.newsletter}
+            // onChange={handleChangeNewsletter}
           />
           <span>S'inscrire à notre newsletter</span>
         </div>
@@ -58,7 +99,7 @@ const Signup = () => {
           Conditions et Politique de Confidentialité de Vinted. Je confirme
           avoir au moins 18 ans.
         </p>
-        {/* <input onSubmit={handleSubmit} value="S'inscrire" /> */}
+        <button type="submit">S'inscrire"</button>
       </form>
     </>
   );
