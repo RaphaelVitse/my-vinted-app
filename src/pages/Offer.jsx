@@ -41,12 +41,50 @@ const Offer = () => {
             </div>
 
             <div className="main-right">
-              <p>{data.product_price} </p>
-              <p>{data.product_details[0].MARQUE} </p>
-              <p>{data.product_price} </p>
-              <p>{data.product_price} </p>
-              <p>{data.product_price} </p>
+              <div className="product-details">
+                <p className="price-offer">
+                  {data.product_price.toFixed(2)} €{" "}
+                </p>
+                <div className="main-descr-product">
+                  <div className="left-descr-product">
+                    {data.product_details.map((detail, index) => {
+                      const keysInObj = Object.keys(detail);
+                      const keyInObj = keysInObj[0];
+                      return (
+                        <div key={index} className="test1">
+                          <p>{keyInObj}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="right-descr-product">
+                    {data.product_details.map((detail, index) => {
+                      const keysInObj = Object.keys(detail);
+                      const keyInObj = keysInObj[0];
+                      return (
+                        <div key={index} className="test2">
+                          <p>{detail[keyInObj]}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <p className="product-name">{data.product_name}</p>
+              <p className="details-descr">{data.product_description}</p>
+              <div className="avatar-name">
+                {data.owner.account.avatar && (
+                  <p>
+                    <img
+                      className="avatar-for-descr"
+                      src={data.owner.account.avatar.url}
+                      alt="avatar"
+                    />
+                  </p>
+                )}
 
+                <p className=""> {data.owner.account.username}</p>
+              </div>
               <button className="btn-buy"> Acheter</button>
             </div>
           </div>
