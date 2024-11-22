@@ -1,6 +1,7 @@
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Cookies from "js-cookie";
 
 // PAGES
 
@@ -12,17 +13,20 @@ import Login from "./pages/Login";
 //COMPONENTS
 
 import Header from "./components/Header";
+import { useState } from "react";
 
 function App() {
+  const [token, setToken] = useState(Cookies.get("token") || null);
+
   return (
     <>
       <Router>
-        <Header />
+        <Header token={token} setToken={setToken} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/offers/:id" element={<Offer />} />
-          <Route path="/user/signup" element={<Signup />} />
-          <Route path="/user/login" element={<Login />} />
+          <Route path="/signup" element={<Signup setToken={setToken} />} />
+          <Route path="/login" element={<Login setToken={setToken} />} />
         </Routes>
       </Router>
     </>

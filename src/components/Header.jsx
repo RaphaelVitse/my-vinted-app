@@ -1,9 +1,13 @@
 import logo from "../assets/logo.svg";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
-const Header = () => {
+const Header = ({ token, setToken }) => {
   const navigate = useNavigate();
+  // const token = Cookies.get("token");
+  // console.log(token);
+
   return (
     <>
       <header>
@@ -23,8 +27,38 @@ const Header = () => {
             </div>
           </form>
           <div className="btn">
-            <button className="btn-subs-login">S'inscrire</button>
-            <button className="btn-subs-login">Se connecter</button>
+            {token ? (
+              <button
+                className="btn-disconnect"
+                onClick={() => {
+                  Cookies.remove("token");
+                  setToken(null);
+                }}
+              >
+                Se déconnecter
+              </button>
+            ) : (
+              <>
+                <button
+                  className="btn-subs-login"
+                  onClick={() => {
+                    navigate("/signup");
+                  }}
+                >
+                  S'inscrire
+                </button>
+
+                <button
+                  className="btn-subs-login"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  Se connecter
+                </button>
+              </>
+            )}
+
             <button className="btn-sell">Vends tes articles</button>
           </div>
         </nav>

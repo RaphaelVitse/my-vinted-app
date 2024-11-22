@@ -37,6 +37,10 @@ header button {
   background: white;
   color: #007783;
 }
+.btn-disconnect {
+  background: #c2275a;
+  color: white;
+}
 .btn-sell {
   background: #007783;
   color: white;
@@ -111,6 +115,7 @@ form input {
 /* PARTIE ANNONCES*/
 .avatar {
   width: 15px;
+  border-radius: 50%;
 }
 
 .offer-container {
@@ -261,4 +266,16 @@ form input {
 .newsletter {
   display: flex;
   justify-content: center;
+}
+
+.link-login-signup {
+  margin: 15px auto;
+  display: block;
+  width: 320px;
+  text-align: center;
+  color: #20b2aa;
+}
+
+.error-message {
+  color: red;
 }

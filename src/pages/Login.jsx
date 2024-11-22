@@ -1,17 +1,14 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [formData, setFormData] = useState(
-    Cookies.get("token") || {
-      email: "",
-      password: "",
-    }
-  );
+const Login = ({ setToken }) => {
+  const [formData, setFormData] = useState("");
 
-  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleChangeEmail = (event) => {
     const value = event.target.value;
@@ -33,6 +30,7 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage(null);
     try {
       const response = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/login",
@@ -41,35 +39,51 @@ const Login = () => {
       console.log(response.data.token);
       const token = response.data.token;
       Cookies.set("token", token, { expires: 7 });
+      setToken(token);
+
+      navigate("/");
     } catch (error) {
       console.log(error);
-      setMessage("Mauvais email et/ou mot de passe");
+      if (error.status === 400 || error.status === 401) {
+        setErrorMessage("Mauvais email et/ou mot de passe");
+      } else {
+        setErrorMessage("Prblome serveur");
+      }
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1 className="title-form">Se connecter</h1>
+    <>
+      <form onSubmit={handleSubmit}>
+        <h1 className="title-form">Se connecter</h1>
 
-      <input
-        type="mail"
-        placeholder="Email"
-        name="email"
-        value={formData.email}
-        onChange={handleChangeEmail}
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        name="password"
-        value={formData.password}
-        onChange={handleChangePassword}
-      />
+        <input
+          type="mail"
+          placeholder="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChangeEmail}
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          name="password"
+          value={formData.password}
+          onChange={handleChangePassword}
+        />
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>{message}</p>
+        <button type="submit">Se Connecter</button>
+      </form>
 
-      <button type="submit">Se Connecter</button>
-    </form>
+      <Link
+        style={{ textDecoration: "none" }}
+        className="link-login-signup"
+        to="/signup"
+      >
+        Pas encore de compte ? Inscris-toi !
+      </Link>
+    </>
   );
 };
 

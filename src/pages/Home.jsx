@@ -42,10 +42,6 @@ const Home = () => {
       </div>
       <main className="container offer-container">
         {data.offers.map((offer) => {
-          // console.log(
-          //   `owner = + ${offer.owner.account.username} et avatar est ${offer.owner.account.avatar.url} `
-          // );
-
           return (
             <section key={offer._id}>
               <div className="offer-card">

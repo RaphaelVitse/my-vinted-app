@@ -1,64 +1,39 @@
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import axios from "axios";
 
-const Signup = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    newsletter: false,
-  });
+const Signup = ({ setToken }) => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [newsletter, setNewsletter] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleChangeUsername = (event) => {
-    const value = event.target.value;
-    const newFormData = {
-      ...formData,
-      username: value,
-    };
-
-    setFormData(newFormData);
-  };
-  const handleChangeEmail = (event) => {
-    const value = event.target.value;
-    const newFormData = {
-      ...formData,
-      email: value,
-    };
-
-    setFormData(newFormData);
-  };
-  const handleChangePassword = (event) => {
-    const value = event.target.value;
-    const newFormData = {
-      ...formData,
-      password: value,
-    };
-
-    setFormData(newFormData);
-  };
-  //   const handleChangeNewsletter = (event) => {
-  //     const value = event.target.value;
-  //     const newFormData = {
-  //       ...formData,
-  //       password: value,
-  //     };
-
-  //     setFormData(newFormData);
-  //   };
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage(null);
     try {
       const response = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        formData
+        { username, email, password, newsletter }
       );
       console.log(response.data.token);
       const token = response.data.token;
       Cookies.set("token", token, { expires: 7 });
+      setToken(token);
+      navigate("/");
     } catch (error) {
       console.log(error);
+      if (error.response.data.message === "Missing parameters") {
+        setErrorMessage("Veuillez compléter tous les champs !");
+      } else if (error.response.status === 409) {
+        setErrorMessage("L'adresse mail saisie existe déjà");
+      } else {
+        setErrorMessage("Une erreur est survenue, merci de réessayer");
+      }
     }
   };
 
@@ -69,28 +44,37 @@ const Signup = () => {
         <input
           type="text"
           placeholder="Nom d'utilisateur"
-          value={formData.username}
-          onChange={handleChangeUsername}
+          value={username}
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
         />
         <input
           type="mail"
           placeholder="Email"
           name="email"
-          value={formData.email}
-          onChange={handleChangeEmail}
+          value={email}
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
         />
         <input
           type="password"
           placeholder="Mot de passe"
           name="password"
-          value={formData.password}
-          onChange={handleChangePassword}
+          value={password}
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
         />
         <div className="newsletter">
           <input
             type="checkbox"
             name="newsletter"
-            // onChange={handleChangeNewsletter}
+            checked={newsletter}
+            onChange={() => {
+              setNewsletter(!newsletter);
+            }}
           />
           <span>S'inscrire à notre newsletter</span>
         </div>
@@ -100,9 +84,61 @@ const Signup = () => {
           avoir au moins 18 ans.
         </p>
         <button type="submit">S'inscrire"</button>
+        {errorMessage && <p className="error-message"> {errorMessage}</p>}
       </form>
+      <Link
+        style={{ textDecoration: "none" }}
+        className="link-login-signup"
+        to="/login"
+      >
+        Tu as déjà un compte ? Connecte-toi !
+      </Link>
     </>
   );
 };
 
 export default Signup;
+
+// const [formData, setFormData] = useState({
+//   username: "",
+//   email: "",
+//   password: "",
+//   newsletter: false,
+// });
+
+// const handleChangeUsername = (event) => {
+//   const value = event.target.value;
+//   const newFormData = {
+//     ...formData,
+//     username: value,
+//   };
+
+//   setFormData(newFormData);
+// };
+// const handleChangeEmail = (event) => {
+//   const value = event.target.value;
+//   const newFormData = {
+//     ...formData,
+//     email: value,
+//   };
+
+//   setFormData(newFormData);
+// };
+// const handleChangePassword = (event) => {
+//   const value = event.target.value;
+//   const newFormData = {
+//     ...formData,
+//     password: value,
+//   };
+
+//   setFormData(newFormData);
+// };
+// const handleChangeNewsletter = () => {
+//   const checked = ;
+//   const newFormData = {
+//     ...formData,
+//     newsletter: checked,
+//   };
+
+//   setFormData(newFormData);
+// };
