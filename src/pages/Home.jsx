@@ -12,10 +12,10 @@ const Home = ({ title }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  const resultsPerPage = 5;
+  const resultsPerPage = 10;
 
   const totalResults = data.count;
-  // console.log(totalResults);
+  console.log(totalResults);
   const nbMaxpages = Math.ceil(totalResults / resultsPerPage);
   console.log(nbMaxpages);
 
@@ -123,7 +123,7 @@ const Home = ({ title }) => {
         </button>
 
         <button
-          disabled={nbMaxpages === currentPage / 5 + 1}
+          disabled={nbMaxpages <= currentPage / resultsPerPage + 1}
           onClick={() => {
             const nextPage = currentPage + resultsPerPage;
             setCurrentPage(nextPage);
