@@ -333,3 +333,23 @@ header button {
   background: gray;
   font-style: italic;
 }
+
+/* PAGEE PUBLISH  */
+.page-publish {
+  width: 100%;
+  background: #eaedee;
+}
+.download-section {
+  background: crimson;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+#file {
+  /* display: none; */
+}
+.page-publish form > div {
+  margin: 20px 0;
+}

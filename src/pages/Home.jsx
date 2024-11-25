@@ -12,7 +12,7 @@ const Home = ({ title }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  const resultsPerPage = 10;
+  const resultsPerPage = 5;
 
   const totalResults = data.count;
   console.log(totalResults);

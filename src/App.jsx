@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Offer from "./pages/Offer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Publish from "./pages/Publish";
 
 //COMPONENTS
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/offers/:id" element={<Offer />} />
           <Route path="/signup" element={<Signup setToken={setToken} />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
+          <Route path="/publish" element={<Publish token={token} />} />
         </Routes>
       </Router>
     </>

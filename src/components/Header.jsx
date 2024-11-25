@@ -61,7 +61,18 @@ const Header = ({ token, setToken, title, setTitle }) => {
               </>
             )}
 
-            <button className="btn-sell">Vends tes articles</button>
+            <button
+              className="btn-sell"
+              onClick={() => {
+                if (token) {
+                  navigate("/publish");
+                } else {
+                  navigate("/login");
+                }
+              }}
+            >
+              Vends tes articles
+            </button>
           </div>
         </nav>
       </header>
