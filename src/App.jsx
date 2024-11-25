@@ -17,13 +17,22 @@ import { useState } from "react";
 
 function App() {
   const [token, setToken] = useState(Cookies.get("token") || null);
+  const [title, setTitle] = useState("");
 
   return (
     <>
       <Router>
-        <Header token={token} setToken={setToken} />
+        <Header
+          token={token}
+          setToken={setToken}
+          title={title}
+          setTitle={setTitle}
+        />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={<Home title={title} setTitle={setTitle} />}
+          />
           <Route path="/offers/:id" element={<Offer />} />
           <Route path="/signup" element={<Signup setToken={setToken} />} />
           <Route path="/login" element={<Login setToken={setToken} />} />

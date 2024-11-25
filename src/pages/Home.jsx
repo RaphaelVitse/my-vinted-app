@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import banner from "../assets/banner.jpg";
 // import tear from "../assets/tear-white.svg";
 
-const Home = () => {
+const Home = ({ title }) => {
   const params = useParams();
   // console.log(params);
 
@@ -22,8 +22,13 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        let filters = "";
+        if (title) {
+          filters = filters + "?title=" + title;
+        }
+
         const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/v2/offers"
+          "https://lereacteur-vinted-api.herokuapp.com/v2/offers" + filters
         );
         console.log(response);
 
@@ -35,7 +40,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, []);
+  }, [title]);
 
   return isLoading ? (
     <p>Loading...</p>
@@ -106,35 +111,26 @@ const Home = () => {
             );
           })}
       </main>
-      <div
-        // onClick={() => {
-        //   const previousPage = resultsPerPage - currentPage;
-        //   setCurrentPage(previousPage);
-        // }}
-        className="pagination"
-      >
-        {currentPage > 0 && (
-          <button
-            onClick={() => {
-              const previousPage = currentPage - resultsPerPage;
-              setCurrentPage(previousPage);
-            }}
-          >
-            Page precedente
-          </button>
-        )}
+      <div className="pagination">
+        <button
+          disabled={currentPage === 0}
+          onClick={() => {
+            const previousPage = currentPage - resultsPerPage;
+            setCurrentPage(previousPage);
+          }}
+        >
+          Page precedente
+        </button>
 
-        {nbMaxpages > currentPage / 5 + 1 && (
-          <button
-            // disabled={nbMaxpages === currentPage / 5 + 1}
-            onClick={() => {
-              const nextPage = currentPage + resultsPerPage;
-              setCurrentPage(nextPage);
-            }}
-          >
-            Page suivante
-          </button>
-        )}
+        <button
+          disabled={nbMaxpages === currentPage / 5 + 1}
+          onClick={() => {
+            const nextPage = currentPage + resultsPerPage;
+            setCurrentPage(nextPage);
+          }}
+        >
+          Page suivante
+        </button>
       </div>
     </>
   );

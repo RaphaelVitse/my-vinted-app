@@ -1,9 +1,9 @@
 import logo from "../assets/logo.svg";
 import { FiSearch } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const Header = ({ token, setToken }) => {
+const Header = ({ token, setToken, title, setTitle }) => {
   const navigate = useNavigate();
   // const token = Cookies.get("token");
   // console.log(token);
@@ -12,18 +12,20 @@ const Header = ({ token, setToken }) => {
     <>
       <header>
         <nav className="container">
-          <div
-            className="logo"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
+          <Link to="/" className="logo">
             <img src={logo} alt="logo vinted" />
-          </div>
+          </Link>
           <form className="search-form">
             <div className="search-bar">
               <FiSearch className="icon-search" />
-              <input type="text" placeholder="Recherche des articles" />
+              <input
+                type="text"
+                placeholder="Recherche des articles"
+                value={title}
+                onChange={(event) => {
+                  setTitle(event.target.value);
+                }}
+              />
             </div>
           </form>
           <div className="btn">

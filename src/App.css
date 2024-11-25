@@ -329,3 +329,7 @@ header button {
   outline: none;
   border-radius: 5px;
 }
+.pagination button:disabled {
+  background: gray;
+  font-style: italic;
+}
