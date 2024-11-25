@@ -54,8 +54,8 @@ const Login = ({ setToken }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <h1 className="title-form">Se connecter</h1>
+      <form className="signup-login-form" onSubmit={handleSubmit}>
+        <h2 className="title-form">Se connecter</h2>
 
         <input
           type="mail"
@@ -65,6 +65,7 @@ const Login = ({ setToken }) => {
           onChange={handleChangeEmail}
         />
         <input
+          className="input-password"
           type="password"
           placeholder="Mot de passe"
           name="password"
@@ -73,16 +74,17 @@ const Login = ({ setToken }) => {
         />
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-        <button type="submit">Se Connecter</button>
+        <button className="btn-signup-login" type="submit">
+          Se Connecter
+        </button>
+        <Link
+          style={{ textDecoration: "none" }}
+          className="link-login-signup"
+          to="/signup"
+        >
+          Pas encore de compte ? Inscris-toi !
+        </Link>
       </form>
-
-      <Link
-        style={{ textDecoration: "none" }}
-        className="link-login-signup"
-        to="/signup"
-      >
-        Pas encore de compte ? Inscris-toi !
-      </Link>
     </>
   );
 };

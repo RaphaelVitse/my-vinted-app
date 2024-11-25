@@ -20,7 +20,7 @@ const Header = ({ token, setToken }) => {
           >
             <img src={logo} alt="logo vinted" />
           </div>
-          <form>
+          <form className="search-form">
             <div className="search-bar">
               <FiSearch className="icon-search" />
               <input type="text" placeholder="Recherche des articles" />

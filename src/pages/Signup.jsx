@@ -39,8 +39,8 @@ const Signup = ({ setToken }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <h1 className="title-form">S'inscrire</h1>
+      <form className="signup-login-form" onSubmit={handleSubmit}>
+        <h2 className="title-form">S'inscrire</h2>
         <input
           type="text"
           placeholder="Nom d'utilisateur"
@@ -59,6 +59,7 @@ const Signup = ({ setToken }) => {
           }}
         />
         <input
+          className="input-password"
           type="password"
           placeholder="Mot de passe"
           name="password"
@@ -69,6 +70,7 @@ const Signup = ({ setToken }) => {
         />
         <div className="newsletter">
           <input
+            className=".checkbox"
             type="checkbox"
             name="newsletter"
             checked={newsletter}
@@ -76,23 +78,25 @@ const Signup = ({ setToken }) => {
               setNewsletter(!newsletter);
             }}
           />
-          <span>S'inscrire à notre newsletter</span>
+          <p className="txt-sub-newsletter">S'inscrire à notre newsletter</p>
         </div>
-        <p>
+        <p className="accept-text">
           En m'inscrivant je confirme avoir lu et accepté les Termes &
           Conditions et Politique de Confidentialité de Vinted. Je confirme
           avoir au moins 18 ans.
         </p>
-        <button type="submit">S'inscrire"</button>
+        <button type="submit" className="btn-signup-login">
+          S'inscrire"
+        </button>
         {errorMessage && <p className="error-message"> {errorMessage}</p>}
+        <Link
+          style={{ textDecoration: "none" }}
+          className="link-login-signup"
+          to="/login"
+        >
+          Tu as déjà un compte ? Connecte-toi !
+        </Link>
       </form>
-      <Link
-        style={{ textDecoration: "none" }}
-        className="link-login-signup"
-        to="/login"
-      >
-        Tu as déjà un compte ? Connecte-toi !
-      </Link>
     </>
   );
 };
