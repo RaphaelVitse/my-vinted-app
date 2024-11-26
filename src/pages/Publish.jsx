@@ -15,6 +15,8 @@ const Publish = ({ token }) => {
   const [city, setCity] = useState("");
   const [exchange, setExchange] = useState(false);
 
+  const [preview, setPreview] = useState(null); // pour afficher une preview de l'image téléchargée
+
   const navigate = useNavigate();
 
   return (
@@ -52,12 +54,19 @@ const Publish = ({ token }) => {
                   }
                 );
                 console.log(response.data);
+                if (response.data._id) {
+                  // permet de rediriger vers la page de l'offre :
+                  navigate("/offers/" + response.data._id);
+                } else {
+                  console.log("une erreur est intervenue");
+                }
               } catch (error) {
                 console.log(error.response);
               }
             }}
           >
             <div className="download-section">
+              {product_pictures && <img src={preview} alt="preview image" />}
               <label htmlFor="file">
                 <FaPlus /> Ajoute une photo
               </label>
@@ -66,108 +75,128 @@ const Publish = ({ token }) => {
                 id="file"
                 onChange={(event) => {
                   setProduct_pictures(event.target.files[0]);
+                  setPreview(URL.createObjectURL(event.target.files[0]));
                 }}
               />
             </div>
-            <div className="product_name-section">
-              <label htmlFor="product_name">Titre</label>
-              <input
-                type="text"
-                placeholder="ex : chemise Sézane verte"
-                id="product_name"
-                value={product_name}
-                onChange={(event) => {
-                  setProduct_name(event.target.value);
-                }}
-              />
-              <label htmlFor="product_description">Décris ton article</label>
-              <textarea
-                placeholder="ex : porté quelque fois, taille correctement,..."
-                id="product_description"
-                value={product_description}
-                onChange={(event) => {
-                  setProduct_description(event.target.value);
-                }}
-              />
+            <div className="product_section">
+              <div className="product_name-section">
+                <label htmlFor="product_name">Titre</label>
+                <input
+                  type="text"
+                  placeholder="ex : chemise Sézane verte"
+                  id="product_name"
+                  value={product_name}
+                  onChange={(event) => {
+                    setProduct_name(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="product_description_section">
+                <label htmlFor="product_description">Décris ton article</label>
+                <textarea
+                  placeholder="ex : porté quelque fois, taille correctement,..."
+                  id="product_description"
+                  value={product_description}
+                  onChange={(event) => {
+                    setProduct_description(event.target.value);
+                  }}
+                />
+              </div>
             </div>
-            <div className="product_details-section">
-              <label htmlFor="brand">Marque</label>
-              <input
-                type="text"
-                placeholder="ex : Zara"
-                id="brand"
-                value={brand}
-                onChange={(event) => {
-                  setBrand(event.target.value);
-                }}
-              />
-              <label htmlFor="size">Taille</label>
-              <input
-                placeholder="ex : porté quelque fois, taille correctement,..."
-                id="size"
-                value={size}
-                onChange={(event) => {
-                  setSize(event.target.value);
-                }}
-              />
-              <label htmlFor="color">Couleur</label>
-              <input
-                placeholder="ex : Fuschia"
-                id="color"
-                value={color}
-                onChange={(event) => {
-                  setColor(event.target.value);
-                }}
-              />
-              <label htmlFor="condition">Etat</label>
-              <input
-                placeholder="ex : Neuf avec étiquette"
-                id="condition"
-                value={condition}
-                onChange={(event) => {
-                  setCondition(event.target.value);
-                }}
-              />
-              <label htmlFor="city">Lieu</label>
-              <input
-                placeholder="ex : Paris"
-                id="city"
-                value={city}
-                onChange={(event) => {
-                  setCity(event.target.value);
-                }}
-              />
+            <div className="product_section">
+              <div className="product_brand">
+                <label htmlFor="brand">Marque</label>
+                <input
+                  type="text"
+                  placeholder="ex : Zara"
+                  id="brand"
+                  value={brand}
+                  onChange={(event) => {
+                    setBrand(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="product_size">
+                <label htmlFor="size">Taille</label>
+                <input
+                  placeholder="ex : porté quelque fois, taille correctement,..."
+                  id="size"
+                  value={size}
+                  onChange={(event) => {
+                    setSize(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="product_color">
+                <label htmlFor="color">Couleur</label>
+                <input
+                  placeholder="ex : Fuschia"
+                  id="color"
+                  value={color}
+                  onChange={(event) => {
+                    setColor(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="product_condition">
+                <label htmlFor="condition">Etat</label>
+                <input
+                  placeholder="ex : Neuf avec étiquette"
+                  id="condition"
+                  value={condition}
+                  onChange={(event) => {
+                    setCondition(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="product_city">
+                <label htmlFor="city">Lieu</label>
+                <input
+                  placeholder="ex : Paris"
+                  id="city"
+                  value={city}
+                  onChange={(event) => {
+                    setCity(event.target.value);
+                  }}
+                />
+              </div>
             </div>
             <div className="product_price-section">
-              <label htmlFor="product_price">Prix</label>
-              <input
-                type="text"
-                placeholder="ex : chemise Sézane verte"
-                id="product_price"
-                value={product_price}
-                onChange={(event) => {
-                  setProduct_price(event.target.value);
-                }}
-              />
-              <input
-                className=".checkbox-exchange"
-                type="checkbox"
-                name="exchange"
-                checked={exchange}
-                onChange={() => {
-                  setExchange(!exchange);
-                }}
-              />
-              <p>Je suis intéressé(e) par un échange</p>
+              <div className="product_price">
+                <label htmlFor="product_price">Prix</label>
+                <input
+                  type="text"
+                  placeholder="ex : chemise Sézane verte"
+                  id="product_price"
+                  value={product_price}
+                  onChange={(event) => {
+                    setProduct_price(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="exchange">
+                <input
+                  className=".checkbox-exchange"
+                  type="checkbox"
+                  name="exchange"
+                  checked={exchange}
+                  onChange={() => {
+                    setExchange(!exchange);
+                  }}
+                />
+                <p>Je suis intéressé(e) par un échange</p>
+              </div>
             </div>
-
-            <button
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              Ajouter
-            </button>
+            <p className="btn-validation">
+              <button
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                Ajouter
+              </button>
+            </p>
           </form>
         </div>
       </div>
