@@ -1,13 +1,15 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Offer = () => {
+const Offer = ({ token }) => {
   const { id } = useParams();
   // console.log(params);
-
+  const navigate = useNavigate();
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,16 +44,14 @@ const Offer = () => {
 
             <div className="main-right">
               <div className="product-details">
-                <p className="price-offer">
-                  {data.product_price.toFixed(2)} €{" "}
-                </p>
+                <p className="price-offer">{data.product_price.toFixed(2)} €</p>
                 <div className="main-descr-product">
                   <div className="left-descr-product">
                     {data.product_details.map((detail, index) => {
                       const keysInObj = Object.keys(detail);
                       const keyInObj = keysInObj[0];
                       return (
-                        <div key={index} className="test1">
+                        <div key={index}>
                           <p>{keyInObj}</p>
                         </div>
                       );
@@ -62,7 +62,7 @@ const Offer = () => {
                       const keysInObj = Object.keys(detail);
                       const keyInObj = keysInObj[0];
                       return (
-                        <div key={index} className="test2">
+                        <div key={index}>
                           <p>{detail[keyInObj]}</p>
                         </div>
                       );
@@ -85,7 +85,24 @@ const Offer = () => {
 
                 <p className=""> {data.owner.account.username}</p>
               </div>
-              <button className="btn-buy"> Acheter</button>
+              <button
+                className="btn-buy"
+                onClick={() => {
+                  if (token) {
+                    navigate("/payment", {
+                      state: {
+                        price: data.product_price,
+                        name: data.product_name,
+                      },
+                    });
+                    // console.log(data.product_price);
+                  } else {
+                    navigate("/login");
+                  }
+                }}
+              >
+                Acheter
+              </button>
             </div>
           </div>
         )}

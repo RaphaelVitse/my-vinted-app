@@ -1,9 +1,18 @@
 import logo from "../assets/logo.svg";
 import { FiSearch } from "react-icons/fi";
+import { LuArrowDownNarrowWide } from "react-icons/lu";
+import { LuArrowUpWideNarrow } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const Header = ({ token, setToken, title, setTitle }) => {
+const Header = ({
+  token,
+  setToken,
+  title,
+  setTitle,
+  btnFilterAsc,
+  setBtnFilterAsc,
+}) => {
   const navigate = useNavigate();
   // const token = Cookies.get("token");
   // console.log(token);
@@ -26,6 +35,28 @@ const Header = ({ token, setToken, title, setTitle }) => {
                   setTitle(event.target.value);
                 }}
               />
+            </div>
+            <div className="filter-asc-desc">
+              <p>Trier par prix</p>
+              <input
+                type="checkbox"
+                name="asc"
+                checked={btnFilterAsc}
+                // onClick={() => {
+                //   const newState = !btnFilterAsc;
+                //   setBtnFilterAsc(newState);
+                // }}
+              />
+              <LuArrowUpWideNarrow className="icon-up" />
+              {/* <input
+                type="checkbox"
+                name="desc"
+                checked={!btnFilterAsc}
+                onClick={() => {
+                  setBtnFilterAsc(!btnFilterAsc);
+                }}
+              />
+              <LuArrowDownNarrowWide className="icon-down" /> */}
             </div>
           </form>
           <div className="btn">
@@ -63,6 +94,7 @@ const Header = ({ token, setToken, title, setTitle }) => {
 
             <button
               className="btn-sell"
+              // mettre le state ici pour renvoyer sur la page precedente
               onClick={() => {
                 if (token) {
                   navigate("/publish");

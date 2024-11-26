@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import banner from "../assets/banner.jpg";
 // import tear from "../assets/tear-white.svg";
 
-const Home = ({ title }) => {
+const Home = ({ title, btnFilterAsc }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,6 +37,13 @@ const Home = ({ title }) => {
             filters = "?page=" + currentPage;
           }
         }
+        if (btnFilterAsc) {
+          if (filters) {
+            filters = filters + "&" + "sort=price-asc";
+          } else {
+            filters = "?sort=price-asc";
+          }
+        }
         console.log(filters);
 
         const response = await axios.get(
@@ -52,7 +59,7 @@ const Home = ({ title }) => {
     };
 
     fetchData();
-  }, [title, currentPage]);
+  }, [title, currentPage, btnFilterAsc]);
 
   return isLoading ? (
     <p>Loading...</p>

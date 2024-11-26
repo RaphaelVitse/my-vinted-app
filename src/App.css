@@ -58,13 +58,27 @@ header button {
   position: relative;
   display: flex;
   align-items: center;
+  margin-top: 20px;
 }
 .icon-search {
   position: absolute;
   left: 10px;
   color: #bbbbbb;
 }
+.filter-asc-desc {
+  display: flex;
+  margin: 10px 0;
+  justify-content: flex-start;
+  align-items: center;
 
+  font-size: 14px;
+  background: blue;
+  width: 200px;
+}
+
+.filter-asc-desc input {
+  width: 20px;
+}
 /* PARTIE BANNIERE */
 
 /* .tear {
@@ -193,6 +207,7 @@ header button {
   color: white;
   background: #007783;
   margin-top: 20px;
+  cursor: pointer;
 }
 
 .product-details {
@@ -352,4 +367,18 @@ header button {
 }
 .page-publish form > div {
   margin: 20px 0;
+}
+
+/* PAGE PAIEMENT */
+
+.payment-container {
+  width: 600px;
+  margin: 200px auto;
+  background: lightskyblue;
+}
+.recap-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
 }
