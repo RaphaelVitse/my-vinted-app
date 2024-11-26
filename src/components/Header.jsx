@@ -1,6 +1,6 @@
 import logo from "../assets/logo.svg";
 import { FiSearch } from "react-icons/fi";
-import { LuArrowDownNarrowWide } from "react-icons/lu";
+// import { LuArrowDownNarrowWide } from "react-icons/lu";
 import { LuArrowUpWideNarrow } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -11,7 +11,7 @@ const Header = ({
   title,
   setTitle,
   btnFilterAsc,
-  setBtnFilterAsc,
+  // setBtnFilterAsc,
 }) => {
   const navigate = useNavigate();
   // const token = Cookies.get("token");

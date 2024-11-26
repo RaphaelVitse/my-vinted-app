@@ -61,13 +61,14 @@ const CheckoutForm = ({ title, amount }) => {
   };
 
   return completed ? (
-    <p>Paiement effectué</p>
+    <p className="confirm-payment">
+      Paiement effectué. Merci pour votre achat !
+    </p>
   ) : (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
       <button type="submit" disabled={!stripe || !elements || isLoading}>
-        {" "}
-        Payer{" "}
+        Payer
       </button>
       {errorMessage && <div>{errorMessage}</div>}
     </form>

@@ -26,24 +26,26 @@ const Payment = () => {
   console.log(options);
 
   return (
-    <section>
+    <section className="payment">
       <div className="payment-container">
         <p>Résumé de la commande</p>
-        <div className="recap-description">
-          <div>
+        <div className="details-payment">
+          <div className="details-purchase">
             <p>Commande</p>
             <p>Frais protection des acheteurs</p>
             <p>Frais de port</p>
-            <p>Total</p>
           </div>
-          <div>
+          <div className="details-price">
             <p>{price} €</p>
-            <p>{deliveryCost} €</p>
             <p>{protectionCost} €</p>
-            <p>{total} €</p>
+            <p>{deliveryCost} €</p>
           </div>
         </div>
-        <p>
+        <div className="total-price">
+          <p>Total</p>
+          <p>{total} €</p>
+        </div>
+        <p className="recap-purchase">
           Il ne vous reste plus qu'une étape pour vous offrir {name} vous allez
           payer {total} € (frais de protection et frais de port inclus)
         </p>
