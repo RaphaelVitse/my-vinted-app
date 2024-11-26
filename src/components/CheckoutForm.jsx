@@ -4,10 +4,14 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
+// import { useLocation } from "react-router-dom";
+
 import axios from "axios";
 import { useState } from "react";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ title, amount }) => {
+  //   const location = useLocation();
+  //   const { title, amount } = location.state;
   const stripe = useStripe();
   const elements = useElements();
 
@@ -28,7 +32,11 @@ const CheckoutForm = () => {
     }
 
     const response = await axios.post(
-      "https://lereacteur-vinted-api.herokuapp.com/v2/payment"
+      "https://lereacteur-vinted-api.herokuapp.com/v2/payment",
+      {
+        title: title,
+        amount: amount,
+      }
     );
     // console.log(response.data);
 

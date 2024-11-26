@@ -20,7 +20,7 @@ const Payment = () => {
   const options = {
     mode: "payment",
     title: name,
-    amount: total * 100,
+    amount: Number(total * 100),
     currency: "eur",
   };
   console.log(options);
@@ -49,7 +49,7 @@ const Payment = () => {
         </p>
         <div className="stripe">
           <Elements stripe={stripePromise} options={options}>
-            <CheckoutForm />
+            <CheckoutForm title={name} amount={total} />
           </Elements>
         </div>
       </div>
